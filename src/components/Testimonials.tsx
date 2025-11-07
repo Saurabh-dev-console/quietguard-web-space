@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiStar } from 'react-icons/fi';
-import { BsQuote } from 'react-icons/bs';
+import testimonialPhoto from '@/assets/testimonial-photo.jpg';
 
 const testimonials = [
   {
@@ -8,56 +8,37 @@ const testimonials = [
     role: 'Digital Marketer',
     content: 'QuietGuard has completely transformed my browsing experience. No more annoying popups or distracting ads. It\'s fast, reliable, and respects my privacy.',
     rating: 5,
-    avatar: 'SJ',
-    color: 'from-blue-500 to-cyan-500'
+    color: 'from-blue-500 to-cyan-500',
+    badge: 'Verified User'
   },
   {
     name: 'Michael Chen',
     role: 'Software Developer',
     content: 'As a developer, I appreciate the technical excellence behind QuietGuard. It uses modern APIs and doesn\'t slow down my browser. The SPA support is excellent.',
     rating: 5,
-    avatar: 'MC',
-    color: 'from-purple-500 to-pink-500'
+    color: 'from-purple-500 to-pink-500',
+    badge: 'Tech Expert'
   },
   {
     name: 'Emily Rodriguez',
     role: 'Content Creator',
     content: 'I spend hours browsing for research, and QuietGuard has been a game-changer. The web feels cleaner, faster, and less cluttered. Highly recommend!',
     rating: 5,
-    avatar: 'ER',
-    color: 'from-green-500 to-emerald-500'
-  },
-  {
-    name: 'David Thompson',
-    role: 'Privacy Advocate',
-    content: 'Finally, an ad blocker that takes privacy seriously. No data collection, no tracking—just pure, effective ad blocking. This is how extensions should be built.',
-    rating: 5,
-    avatar: 'DT',
-    color: 'from-orange-500 to-yellow-500'
-  },
-  {
-    name: 'Lisa Park',
-    role: 'Freelance Writer',
-    content: 'QuietGuard blocks ads without breaking websites. The allowlist feature is perfect for supporting my favorite creators while keeping the rest of the web clean.',
-    rating: 5,
-    avatar: 'LP',
-    color: 'from-rose-500 to-pink-500'
-  },
-  {
-    name: 'James Wilson',
-    role: 'Student',
-    content: 'Pages load so much faster now! QuietGuard saves me time and data, which is perfect for my limited budget. It\'s simple to use and works flawlessly.',
-    rating: 5,
-    avatar: 'JW',
-    color: 'from-indigo-500 to-blue-500'
+    color: 'from-green-500 to-emerald-500',
+    badge: 'Power User'
   },
 ];
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+    <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden bg-card/20">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(217 91% 60%) 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -90,7 +71,7 @@ const Testimonials = () => {
         </motion.div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -98,21 +79,48 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -8 }}
               className="group relative"
             >
-              {/* Gradient Background Glow */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-0 group-hover:opacity-10 blur-xl rounded-2xl transition-all duration-300`} />
+              {/* Glow Effect on Hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-0 group-hover:opacity-20 blur-2xl rounded-2xl transition-all duration-500 -z-10`} />
               
               {/* Card */}
-              <div className="relative bg-card border-2 border-border rounded-2xl p-6 lg:p-8 h-full hover:border-primary/50 transition-all duration-300 flex flex-col">
-                {/* Quote Icon */}
-                <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <BsQuote className="w-12 h-12 text-primary" />
-                </div>
+              <div className="relative bg-card border-2 border-border rounded-2xl p-6 lg:p-8 hover:border-primary/50 transition-all duration-300 h-full overflow-hidden flex flex-col">
+                {/* Gradient Accent Corner */}
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${testimonial.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500`} />
+                
+                {/* Badge */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 + 0.2 }}
+                  className="mb-4"
+                >
+                  <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full bg-gradient-to-r ${testimonial.color} text-white`}>
+                    {testimonial.badge}
+                  </span>
+                </motion.div>
+
+                {/* Photo with Gradient Border */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative mb-6"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-20 rounded-2xl blur-xl`} />
+                  <div className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${testimonial.color} p-1 shadow-lg mx-auto`}>
+                    <img 
+                      src={testimonialPhoto} 
+                      alt={testimonial.name}
+                      className="w-full h-full rounded-xl object-cover"
+                    />
+                  </div>
+                </motion.div>
 
                 {/* Stars */}
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center justify-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <motion.div
                       key={i}
@@ -127,32 +135,30 @@ const Testimonials = () => {
                 </div>
 
                 {/* Content */}
-                <p className="text-muted-foreground mb-6 flex-grow leading-relaxed">
-                  "{testimonial.content}"
-                </p>
+                <div className="relative flex-grow flex flex-col">
+                  <p className="text-muted-foreground leading-relaxed mb-6 text-center flex-grow">
+                    "{testimonial.content}"
+                  </p>
 
-                {/* Author */}
-                <div className="flex items-center gap-4 pt-4 border-t border-border">
-                  {/* Avatar with Gradient */}
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0`}
-                  >
-                    {testimonial.avatar}
-                  </motion.div>
-                  
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-foreground truncate">
+                  {/* Author */}
+                  <div className="text-center pt-4 border-t border-border">
+                    <div className="font-semibold text-foreground text-lg">
                       {testimonial.name}
                     </div>
-                    <div className="text-sm text-muted-foreground truncate">
+                    <div className="text-sm text-muted-foreground">
                       {testimonial.role}
                     </div>
                   </div>
                 </div>
 
                 {/* Bottom Accent Line */}
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${testimonial.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl`} />
+                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${testimonial.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                
+                {/* Corner Decoration */}
+                <div className="absolute top-0 left-0 w-20 h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className={`absolute top-0 left-0 w-2 h-8 bg-gradient-to-b ${testimonial.color}`} />
+                  <div className={`absolute top-0 left-0 w-8 h-2 bg-gradient-to-r ${testimonial.color}`} />
+                </div>
               </div>
             </motion.div>
           ))}
@@ -168,12 +174,12 @@ const Testimonials = () => {
           <div className="inline-flex items-center gap-8 bg-card/50 backdrop-blur-sm border border-border rounded-full px-8 py-4">
             <div className="flex items-center gap-2">
               <div className="flex -space-x-2">
-                {testimonials.slice(0, 4).map((t, i) => (
+                {testimonials.map((t, i) => (
                   <div
                     key={i}
-                    className={`w-8 h-8 rounded-full bg-gradient-to-br ${t.color} border-2 border-background flex items-center justify-center text-white text-xs font-bold`}
+                    className={`w-8 h-8 rounded-full border-2 border-background overflow-hidden`}
                   >
-                    {t.avatar.charAt(0)}
+                    <img src={testimonialPhoto} alt="" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
